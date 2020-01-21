@@ -22,7 +22,30 @@ var budgetController = (function(){
       exp: 0,
       inc: 0
     }
-  }
+  };
+
+  return{
+    addItem: function(type, des, val){
+      
+      var newItem, ID;
+
+      //Create new ID by select id from last object in exp or inc array and increase it.
+      ID = data.allItems[type][data.allItems[type].length-1].id + 1; 
+
+      //Create new item based on 'inc' or 'exp' type
+
+      if(type === 'exp'){
+        newItem = new Exprence(ID, des, val);
+      }else if (type === 'inc'){
+        newItem = new Income(ID, des, val);
+      }
+      //Push new element into data structure
+      data.allItems[type].push(newItem);
+
+      //Return new element
+      return newItem;
+    }
+  };
 })();
 
 //UI CONTROLLER
@@ -66,11 +89,17 @@ var controller = (function(budgetCtrl, UICtrl){
   }
 
   var ctrlAddItem = function(){
+    
+    var input, newItem;
+
     // 1. Get the filed input data
-    var input = UICtrl.getInput();
+    input = UICtrl.getInput();
 
     // 2. Add the item to the budget controller
+    newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+    
     // 3. Add the item to the UI
+
     // 4. Calculate  the budget
     // 5. Display the budget to the UI
   };
