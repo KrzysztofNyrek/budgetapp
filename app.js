@@ -30,12 +30,17 @@ var budgetController = (function(){
       var newItem, ID;
 
       //Create new ID by select id from last object in exp or inc array and increase it.
-      ID = data.allItems[type][data.allItems[type].length-1].id + 1; 
+      if(data.allItems[type].length > 0){
+        ID = data.allItems[type][data.allItems[type].length-1].id + 1; 
+      } else {
+        ID = 0;
+      }
+     
 
       //Create new item based on 'inc' or 'exp' type
 
       if(type === 'exp'){
-        newItem = new Exprence(ID, des, val);
+        newItem = new Expense(ID, des, val);
       }else if (type === 'inc'){
         newItem = new Income(ID, des, val);
       }
@@ -44,6 +49,9 @@ var budgetController = (function(){
 
       //Return new element
       return newItem;
+    },
+    testing: function(){
+      console.log(data);
     }
   };
 })();
@@ -97,7 +105,7 @@ var controller = (function(budgetCtrl, UICtrl){
 
     // 2. Add the item to the budget controller
     newItem = budgetCtrl.addItem(input.type, input.description, input.value);
-    
+
     // 3. Add the item to the UI
 
     // 4. Calculate  the budget
