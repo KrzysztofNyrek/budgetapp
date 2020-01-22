@@ -146,6 +146,7 @@ var controller = (function(budgetCtrl, UICtrl){
     // 1. Get the filed input data
     input = UICtrl.getInput();
 
+    if(input.description !== "" && !isNaN(input.value) && input.value > 0){
     // 2. Add the item to the budget controller
     newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
@@ -157,7 +158,8 @@ var controller = (function(budgetCtrl, UICtrl){
 
     // 5. Calculate and update budget
     updatebudget();
-    
+    }
+
   };
 
   //function allow us to start aplication
