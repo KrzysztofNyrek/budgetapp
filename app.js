@@ -126,7 +126,8 @@ var UIController = (function(){
     incomeLabel: '.budget__income--value',
     expensesLabel: '.budget__expenses--value',
     percentageLabel: '.budget__expenses--percentage',
-    container: '.container'
+    container: '.container',
+    expensesPercLabel: '.item__percentage'
   };
 
   //Set below value public, that other parts of code have access to this value.
@@ -187,6 +188,24 @@ var UIController = (function(){
         document.querySelector(DOMstrings.percentageLabel).textContent = '---';
       }
     },
+    dispalyPercentages: function(percentages){
+      var fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
+
+      var NodeListForEach = function(list, callback){
+        for (var i = 0; i < list.length; i++){
+          callback(list[i], i);
+        }
+      };
+      NodeListForEach(fields, function(current, index){
+        if (percentages[index] >0){
+          current.textContent = percentages[index] + '%';
+        }else{
+          current.textContent = '---';
+        }
+        
+      });
+    },
+    
     getDOMstrings: function(){
       return DOMstrings;
     }
@@ -215,7 +234,7 @@ var controller = (function(budgetCtrl, UICtrl){
     // 2. Read percentage from the budget controller
     var percentages = budgetCtrl.getPercentage();
     // 3. Update the UI with the new percentages
-    console.log(percentages);
+    UICtrl.dispalyPercentages(percentages);
   };
   var updatebudget = function(){
   
