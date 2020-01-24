@@ -1,5 +1,5 @@
 # budgetapp
-![Plus and minus, math operator.](/img/Git)logo.png)
+![Plus and minus, math operator.](/img/Git_logo.png)
 ## Description
 This is a budget calculation app, that allows you to add income and expenses. 
 You can add and remove all income and expenses all the time. 
